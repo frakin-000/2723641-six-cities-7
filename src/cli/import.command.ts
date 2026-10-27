@@ -4,30 +4,76 @@ import {createInterface} from 'node:readline';
 
 import chalk from 'chalk';
 
+import {
+  inject,
+  injectable
+} from 'inversify';
+
 import type {Command} from './command.interface.js';
+
+import type {DatabaseClient} from '../shared/database/database-client.interface.js';
+
+import type {UserService} from '../modules/user/user-service.interface.js';
+import type {OfferService} from '../modules/offer/offer-service.interface.js';
+
+import {Component} from '../types/component.enum.js';
+
 import {parseOffer} from './offer.parser.js';
 
+@injectable()
 export class ImportCommand implements Command {
   public readonly name = '--import';
 
-  public async execute(parameters: string[]): Promise<void> {
-    const [filepath] = parameters;
+  constructor(
+    @inject(Component.DatabaseClient)
+    private readonly databaseClient: DatabaseClient,
+
+    @inject(Component.UserService)
+    private readonly userService: UserService,
+
+    @inject(Component.OfferService)
+    private readonly offerService: OfferService
+  ) {}
+
+  public async execute(
+    parameters: string[]
+  ): Promise<void> {
+    const [filepath, databaseUri] = parameters;
 
     if (!filepath) {
       console.error(
         chalk.red('Необходимо указать путь к TSV-файлу.')
       );
+
       return;
     }
 
-    const absolutePath = resolve(process.cwd(), filepath);
+    if (!databaseUri) {
+      console.error(
+        chalk.red(
+          'Необходимо указать строку подключения к MongoDB.'
+        )
+      );
+
+      return;
+    }
+
+    const absolutePath = resolve(
+      process.cwd(),
+      filepath
+    );
 
     let importedCount = 0;
 
     try {
-      const fileStream = createReadStream(absolutePath, {
-        encoding: 'utf-8'
-      });
+      await this.databaseClient.connect(databaseUri);
+
+      const fileStream = createReadStream(
+        absolutePath,
+        {
+          encoding: 'utf-8'
+        }
+      );
 
       const lineReader = createInterface({
         input: fileStream,
@@ -41,10 +87,25 @@ export class ImportCommand implements Command {
 
         const offer = parseOffer(line);
 
-        console.log(
-          chalk.cyan('Получено предложение:')
+        let user = await this.userService.findByEmail(
+          offer.author.email
         );
-        console.log(offer);
+
+        if (!user) {
+          user = await this.userService.create(
+            offer.author
+          );
+        }
+
+        const {
+          author: _author,
+          ...offerData
+        } = offer;
+
+        await this.offerService.create({
+          ...offerData,
+          author: user._id
+        });
 
         importedCount++;
       }
@@ -64,6 +125,8 @@ export class ImportCommand implements Command {
           chalk.red(error.message)
         );
       }
+    } finally {
+      await this.databaseClient.disconnect();
     }
   }
 }
