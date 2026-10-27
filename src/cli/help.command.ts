@@ -12,7 +12,8 @@ ${chalk.yellow('Команды:')}
   ${chalk.green('--version')}                    выводит номер версии
   ${chalk.green('--help')}                       печатает этот текст
   ${chalk.green('--import <path>')}              импортирует данные из TSV
-`;
+  ${chalk.green('--generate <n> <path> <url>')}  генерирует тестовые данные
+  `;
 
 export class HelpCommand implements Command {
   public readonly name = '--help';

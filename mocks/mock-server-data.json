@@ -1,0 +1,105 @@
+{
+  "data": {
+    "titles": [
+      "Уютная квартира в центре города",
+      "Просторный дом для большой компании",
+      "Современная квартира рядом с парком",
+      "Комфортные апартаменты для отдыха",
+      "Светлая квартира с красивым видом",
+      "Небольшой уютный номер в центре"
+    ],
+
+    "descriptions": [
+      "Уютное жильё со всем необходимым для комфортного отдыха и проживания.",
+      "Просторное жильё недалеко от центра города с удобным расположением.",
+      "Современное жильё с хорошим ремонтом и всем необходимым для путешественников.",
+      "Отличный вариант для отдыха в спокойном районе недалеко от основных достопримечательностей.",
+      "Комфортное жильё для нескольких гостей с удобным расположением и хорошим видом.",
+      "Хороший вариант для короткой поездки с необходимыми удобствами и удобной транспортной доступностью."
+    ],
+
+    "cities": [
+      "Paris",
+      "Cologne",
+      "Brussels",
+      "Amsterdam",
+      "Hamburg",
+      "Dusseldorf"
+    ],
+
+    "previewImages": [
+      "https://example.com/preview-1.jpg",
+      "https://example.com/preview-2.jpg",
+      "https://example.com/preview-3.jpg",
+      "https://example.com/preview-4.jpg",
+      "https://example.com/preview-5.jpg",
+      "https://example.com/preview-6.jpg"
+    ],
+
+    "images": [
+      "https://example.com/house-1.jpg",
+      "https://example.com/house-2.jpg",
+      "https://example.com/house-3.jpg",
+      "https://example.com/house-4.jpg",
+      "https://example.com/house-5.jpg",
+      "https://example.com/house-6.jpg",
+      "https://example.com/house-7.jpg",
+      "https://example.com/house-8.jpg"
+    ],
+
+    "housingTypes": [
+      "apartment",
+      "house",
+      "room",
+      "hotel"
+    ],
+
+    "amenities": [
+      "Breakfast",
+      "Air conditioning",
+      "Laptop friendly workspace",
+      "Baby seat",
+      "Washer",
+      "Towels",
+      "Fridge"
+    ],
+
+    "users": [
+      {
+        "name": "Анна",
+        "email": "anna@example.com",
+        "avatar": "avatar1.jpg",
+        "password": "password123",
+        "type": "pro"
+      },
+      {
+        "name": "Алексей",
+        "email": "alex@example.com",
+        "avatar": "avatar2.png",
+        "password": "secret123",
+        "type": "regular"
+      },
+      {
+        "name": "Мария",
+        "email": "maria@example.com",
+        "avatar": "avatar3.jpg",
+        "password": "password321",
+        "type": "regular"
+      },
+      {
+        "name": "Иван",
+        "email": "ivan@example.com",
+        "avatar": "avatar4.jpg",
+        "password": "qwerty123",
+        "type": "pro"
+      },
+      {
+        "name": "Ольга",
+        "email": "olga@example.com",
+        "avatar": "avatar5.png",
+        "password": "password555",
+        "type": "regular"
+      }
+    ]
+  }
+}
