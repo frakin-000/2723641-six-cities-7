@@ -1,18 +1,12 @@
-import type {HydratedDocument} from 'mongoose';
+import type { HydratedDocument } from 'mongoose';
 
-import type {User} from '../../types/user.type.js';
-import type {UserEntity} from './user.entity.js';
+import type { UserEntity } from './user.entity.js';
+import type { CreateUserDto } from './dto/create-user.dto.js';
 
 export interface UserService {
-  findById(
-    id: string
-  ): Promise<HydratedDocument<UserEntity> | null>;
+  findById(id: string): Promise<HydratedDocument<UserEntity> | null>;
 
-  findByEmail(
-    email: string
-  ): Promise<HydratedDocument<UserEntity> | null>;
+  findByEmail(email: string): Promise<HydratedDocument<UserEntity> | null>;
 
-  create(
-    user: User
-  ): Promise<HydratedDocument<UserEntity>>;
+  create(dto: CreateUserDto): Promise<HydratedDocument<UserEntity>>;
 }

@@ -1,0 +1,5 @@
+import type { CreateOfferDto } from './create-offer.dto.js';
+
+export type UpdateOfferDto = Partial<
+  Omit<CreateOfferDto, 'author' | 'publicationDate'>
+>;
