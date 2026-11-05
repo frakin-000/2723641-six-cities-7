@@ -24,7 +24,6 @@ const cliApplication = new CliApplication([
 ]);
 
 
-
 try {
   await cliApplication.run(process.argv.slice(2));
 } catch (error: unknown) {
